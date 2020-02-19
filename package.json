@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "start": "webpack-dev-server"
+    "build": "npm run clean && webpack",
+    "start": "webpack-dev-server",
+    "clean": "rimraf dist"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "react-dom": "^16.12.0",
     "react-select": "^3.0.8",
     "react-virtualized": "^9.21.2",
+    "rimraf": "^3.0.2",
     "styled-components": "^5.0.1",
     "vega": "^5.9.1",
     "vega-embed": "^6.2.2",
@@ -47,6 +49,7 @@
     "webpack-dev-server": "^3.10.3"
   },
   "interleave": {
-    "src/Hello.js": "Hello"
+    "src/Hello.js": "Hello",
+    "src/Toto.js": "Toto"
   }
 }
