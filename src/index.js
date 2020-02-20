@@ -1,13 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Hello from "./Hello";
-import Toto from "./Toto";
+import App from "./App";
+import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
+
 ReactDOM.render(
-  <div>
-    hello, I am metalK8s
-    <Hello />
-    <Toto />
-  </div>,
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
   document.getElementById("root")
 );

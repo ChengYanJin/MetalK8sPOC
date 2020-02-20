@@ -36,7 +36,8 @@ module.exports = {
   },
   devServer: {
     compress: true,
-    port: 3001
+    port: 3001,
+    historyApiFallback: true
   },
   // `HtmlWebpackPlugin` will generate index.html into the build folder
   plugins: [
