@@ -42,7 +42,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({ template: "src/index.html" }),
     new URLImportPlugin({
-      manifestName: "metalK8s"
+      manifestName: "metalK8s",
+      publicPath: "external-component/metalk8s/"
     })
   ]
 };
