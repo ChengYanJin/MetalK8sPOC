@@ -10,6 +10,7 @@ import {
 import { Tabs } from "@scality/core-ui";
 import Volume from "./Volume";
 import Node from "./Node";
+import Owner from "./Owner";
 
 const App = () => {
   const history = useHistory();
@@ -27,6 +28,11 @@ const App = () => {
       onClick: () => history.push(`${path}/node`),
       selected: location.pathname === "/node",
       title: "Nodes"
+    },
+    {
+      onClick: () => history.push("/"),
+      selected: location.pathname === "/",
+      title: "Owner"
     }
   ];
 
@@ -39,6 +45,9 @@ const App = () => {
         </Route>
         <Route path={`${path}/node`}>
           <Node />
+        </Route>
+        <Route path="/">
+          <Owner />
         </Route>
       </Switch>
     </div>

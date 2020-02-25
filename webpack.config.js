@@ -68,6 +68,3 @@ module.exports = {
 //   "metal",
 //   util.inspect(config, false, null, true /* enable colors */)
 // );
-
-// Webpack note:
-// HMR (Hot Module Replacement) should never be used in production
