@@ -4,7 +4,7 @@ const URLImportPlugin = require("webpack-external-import/webpack");
 
 const config = {
   entry: {
-    metalMain: "./src/Volume.js"
+    metalMain: "./src/index.js"
   },
   optimization: {
     namedModules: true,
@@ -16,7 +16,7 @@ const config = {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].[contenthash].js"
   },
-  // devtool: "inline-source-map",
+  devtool: "inline-source-map",
   module: {
     rules: [
       {
