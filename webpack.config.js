@@ -1,8 +1,9 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const URLImportPlugin = require("webpack-external-import/webpack");
+const webpack = require("webpack");
 
-const config = {
+module.exports = {
   entry: {
     metalMain: "./src/index.js"
   },
@@ -14,7 +15,7 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].[contenthash].js"
+    filename: "[name].[hash].js"
   },
   devtool: "inline-source-map",
   module: {
@@ -46,22 +47,27 @@ const config = {
   devServer: {
     compress: true,
     port: 3001,
-    historyApiFallback: true
+    historyApiFallback: true,
+    hot: true
   },
   // `HtmlWebpackPlugin` will generate index.html into the build folder
   plugins: [
     new HtmlWebpackPlugin({ template: "src/index.html" }),
     new URLImportPlugin({
       manifestName: "metalK8s",
-      publicPath: "external-component/metalk8s/"
-    })
+      publicPath: "/external-component/metalk8s/"
+    }),
+    new webpack.HotModuleReplacementPlugin()
   ]
 };
-module.exports = config;
+// module.exports = config;
 
-const util = require("util");
-// alternative shortcut
-console.log(
-  "metal",
-  util.inspect(config, false, null, true /* enable colors */)
-);
+// const util = require("util");
+// // alternative shortcut
+// console.log(
+//   "metal",
+//   util.inspect(config, false, null, true /* enable colors */)
+// );
+
+// Webpack note:
+// HMR (Hot Module Replacement) should never be used in production

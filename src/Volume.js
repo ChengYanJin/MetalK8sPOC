@@ -4,7 +4,7 @@ import CreateVolume from "./CreateVolume";
 const Volume = () => {
   return (
     <div>
-      Volume page
+      Welcome to Volume page!!!
       <CreateVolume />
     </div>
   );

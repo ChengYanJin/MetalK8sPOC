@@ -2,12 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import App from "./App";
-// import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
+import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
 
 ReactDOM.render(
-  <div>
+  <BrowserRouter>
     Standalone App
     <App />
-  </div>,
+  </BrowserRouter>,
   document.getElementById("root")
 );
