@@ -2,12 +2,21 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const URLImportPlugin = require("webpack-external-import/webpack");
 
-module.exports = {
-  entry: "./src/index.js",
+const config = {
+  entry: {
+    metalMain: "./src/Volume.js"
+  },
+  optimization: {
+    namedModules: true,
+    namedChunks: true,
+    runtimeChunk: { name: "webpackRuntime" },
+    splitChunks: { chunks: "all" }
+  },
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].[contenthash].js"
   },
+  // devtool: "inline-source-map",
   module: {
     rules: [
       {
@@ -48,3 +57,11 @@ module.exports = {
     })
   ]
 };
+module.exports = config;
+
+const util = require("util");
+// alternative shortcut
+console.log(
+  "metal",
+  util.inspect(config, false, null, true /* enable colors */)
+);

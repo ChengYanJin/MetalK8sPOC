@@ -1,8 +1,13 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import CreateVolume from "./CreateVolume";
 
 const Volume = () => {
-  return <div>Volume page</div>;
+  return (
+    <div>
+      Volume page
+      <CreateVolume />
+    </div>
+  );
 };
 
 export default Volume;
