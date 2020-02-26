@@ -37,8 +37,7 @@
     "vega-lite": "^4.3.1",
     "webpack-external-import": "github:carlito-scality/webpack-external-import.git#microapp-poc",
     "react-redux": "^7.1.0",
-    "redux": "^4.0.1",
-    "redux-saga": "^1.0.2"
+    "redux": "^4.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",

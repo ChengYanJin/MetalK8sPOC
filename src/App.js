@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import {
   useHistory,
@@ -11,8 +11,15 @@ import { Tabs } from "@scality/core-ui";
 import Volume from "./Volume";
 import Node from "./Node";
 import Owner from "./Owner";
+import configReducer from "./ducks/config";
 
-const App = () => {
+const App = props => {
+  const { store, namespace } = props;
+  // Inject our reducer
+  useEffect(() => {
+    store.injectReducer(`${namespace}_config`, configReducer);
+  }, []);
+
   const history = useHistory();
   const location = useLocation();
   let { path } = useRouteMatch();
@@ -48,6 +55,7 @@ const App = () => {
         </Route>
         <Route path="/">
           <Owner />
+          <button onClick={() => inject()}>inject metalk8s</button>
         </Route>
       </Switch>
     </div>
