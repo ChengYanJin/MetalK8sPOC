@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import ReactDOM from "react-dom";
 import {
   useHistory,
   Switch,
@@ -12,12 +11,21 @@ import Volume from "./Volume";
 import Node from "./Node";
 import Owner from "./Owner";
 import configReducer from "./ducks/config";
+import {
+  setActionCreatorNamespace,
+  namespaceReducerFactory
+} from "./ducks/namespaceHelper";
 
 const App = props => {
   const { store, namespace } = props;
-  // Inject our reducer
+  // set namespace `localMetalk8s`
+  setActionCreatorNamespace(namespace);
+  // inject our reducer for metalk8s
   useEffect(() => {
-    store.injectReducer(`${namespace}_config`, configReducer);
+    store.injectReducer(
+      `${namespace}`,
+      namespaceReducerFactory(namespace, configReducer)
+    );
   }, []);
 
   const history = useHistory();
@@ -55,7 +63,6 @@ const App = props => {
         </Route>
         <Route path="/">
           <Owner />
-          <button onClick={() => inject()}>inject metalk8s</button>
         </Route>
       </Switch>
     </div>

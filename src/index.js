@@ -3,8 +3,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import App from "./App";
 import { createStore, combineReducers } from "redux";
-import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
-import reducer from "./ducks/config";
+import { BrowserRouter } from "react-router-dom";
 
 const defaultState = {};
 const defaultReducer = (state = defaultState) => state;
