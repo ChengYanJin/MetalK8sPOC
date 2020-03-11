@@ -4,7 +4,8 @@ import { Provider } from "react-redux";
 import App from "./App";
 import { createStore, combineReducers } from "redux";
 import { BrowserRouter } from "react-router-dom";
-
+import { namespaced } from "redux-subspace";
+import { SubspaceProvider } from "react-redux-subspace";
 const defaultState = {};
 const defaultReducer = (state = defaultState) => state;
 const staticReducer = {};
@@ -27,7 +28,7 @@ const configureStore = namespace => {
   // Create an inject reducer function
   // This function adds the async reducer, and creates a new combined reducer
   store.injectReducer = (key, asyncReducer) => {
-    store.asyncReducers[key] = asyncReducer;
+    store.asyncReducers[key] = namespaced(key)(asyncReducer);
     store.replaceReducer(createReducer(store.asyncReducers));
   };
 

@@ -15,16 +15,20 @@ import {
   setActionCreatorNamespace,
   namespaceReducerFactory
 } from "./ducks/namespaceHelper";
+import { namespaced } from "redux-subspace";
+
+import { SubspaceProvider } from "react-redux-subspace";
 
 const App = props => {
   const { store, namespace } = props;
+  console.log("namespace", namespace);
   // set namespace `localMetalk8s`
-  setActionCreatorNamespace(namespace);
+  // setActionCreatorNamespace(namespace);
   // inject our reducer for metalk8s
   useEffect(() => {
     store.injectReducer(
       `${namespace}`,
-      namespaceReducerFactory(namespace, configReducer)
+      namespaced(`${namespace}`)(configReducer)
     );
   }, []);
 
@@ -52,20 +56,29 @@ const App = props => {
   ];
 
   return (
-    <div>
-      <Tabs items={items} />
-      <Switch>
-        <Route path={`${path}/volume`}>
-          <Volume />
-        </Route>
-        <Route path={`${path}/node`}>
-          <Node />
-        </Route>
-        <Route path="/">
-          <Owner />
-        </Route>
-      </Switch>
-    </div>
+    <SubspaceProvider
+      mapState={state => {
+        console.log("mapState", state);
+        if (state[namespace]) return state[namespace];
+        else return state;
+      }}
+      namespace={namespace}
+    >
+      <div>
+        <Tabs items={items} />
+        <Switch>
+          <Route path={`${path}/volume`}>
+            <Volume />
+          </Route>
+          <Route path={`${path}/node`}>
+            <Node />
+          </Route>
+          <Route path="/">
+            <Owner />
+          </Route>
+        </Switch>
+      </div>
+    </SubspaceProvider>
   );
 };
 

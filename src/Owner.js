@@ -6,9 +6,7 @@ import { nameSpaceAction } from "./ducks/namespaceHelper";
 const Owner = () => {
   const dispatch = useDispatch();
   return (
-    <button
-      onClick={() => dispatch(nameSpaceAction(changeOwnerAction, "Patrick"))}
-    >
+    <button onClick={() => dispatch(changeOwnerAction("Patrick"))}>
       update owner
     </button>
   );
