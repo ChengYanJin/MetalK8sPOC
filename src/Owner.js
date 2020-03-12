@@ -1,6 +1,6 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { changeOwnerAction } from "./ducks/config";
+import { useDispatch, useSelector } from "react-redux";
+import { changeOwnerAction } from "./ducks/ownerReducer";
 import { nameSpaceAction } from "./ducks/namespaceHelper";
 
 const Owner = () => {

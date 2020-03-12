@@ -6,11 +6,11 @@ import {
   useLocation,
   useRouteMatch
 } from "react-router-dom";
-import { Tabs } from "@scality/core-ui";
+// import { Tabs } from "@scality/core-ui";
 import Volume from "./Volume";
 import Node from "./Node";
 import Owner from "./Owner";
-import configReducer from "./ducks/config";
+import configReducer from "./ducks/configReducer";
 import {
   setActionCreatorNamespace,
   namespaceReducerFactory
@@ -25,12 +25,12 @@ const App = props => {
   // set namespace `localMetalk8s`
   // setActionCreatorNamespace(namespace);
   // inject our reducer for metalk8s
-  useEffect(() => {
-    store.injectReducer(
-      `${namespace}`,
-      namespaced(`${namespace}`)(configReducer)
-    );
-  }, []);
+  // useEffect(() => {
+  //   store.injectReducer(
+  //     `${namespace}`,
+  //     namespaced(`${namespace}`)(configReducer)
+  //   );
+  // }, []);
 
   const history = useHistory();
   const location = useLocation();
@@ -65,7 +65,7 @@ const App = props => {
       namespace={namespace}
     >
       <div>
-        <Tabs items={items} />
+        {/* <Tabs items={items} /> */}
         <Switch>
           <Route path={`${path}/volume`}>
             <Volume />

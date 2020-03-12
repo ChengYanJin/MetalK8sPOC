@@ -1,21 +1,22 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const URLImportPlugin = require("webpack-external-import/webpack");
 const webpack = require("webpack");
+const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
 module.exports = {
   entry: {
     metalMain: "./src/index.js"
   },
-  optimization: {
-    moduleIds: "named",
-    chunkIds: "named", //migrate to webpack 5
-    runtimeChunk: { name: "webpackRuntime" },
-    splitChunks: { chunks: "all" }
-  },
+  // optimization: {
+  //   moduleIds: "named",
+  //   chunkIds: "named", //migrate to webpack 5
+  //   runtimeChunk: { name: "webpackRuntime" },
+  //   splitChunks: { chunks: "all" }
+  // },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].[hash].js"
+    filename: "[name].[hash].js",
+    publicPath: "/external-component/metalk8s"
   },
   devtool: "inline-source-map",
   module: {
@@ -52,23 +53,16 @@ module.exports = {
   },
   // `HtmlWebpackPlugin` will generate index.html into the build folder
   plugins: [
-    new HtmlWebpackPlugin({ template: "src/index.html" }),
-    new URLImportPlugin({
-      manifestName: "metalK8s",
-      publicPath: "/external-component/metalk8s/"
+    new ModuleFederationPlugin({
+      name: "metalk8s",
+      library: { type: "var", name: "metalk8s" },
+      filename: "remoteEntry.js",
+      exposes: {
+        Node: "./src/Node",
+        reducer: "./src/ducks/reducer"
+      }
     }),
+    new HtmlWebpackPlugin({ template: "src/index.html" }),
     new webpack.HotModuleReplacementPlugin()
-  ],
-  node: {
-    Buffer: false,
-    process: false
-  }
+  ]
 };
-// module.exports = config;
-
-// const util = require("util");
-// // alternative shortcut
-// console.log(
-//   "metal",
-//   util.inspect(config, false, null, true /* enable colors */)
-// );
