@@ -8,8 +8,8 @@ module.exports = {
     metalMain: "./src/index.js"
   },
   optimization: {
-    namedModules: true,
-    namedChunks: true,
+    moduleIds: "named",
+    chunkIds: "named", //migrate to webpack 5
     runtimeChunk: { name: "webpackRuntime" },
     splitChunks: { chunks: "all" }
   },
@@ -58,7 +58,11 @@ module.exports = {
       publicPath: "/external-component/metalk8s/"
     }),
     new webpack.HotModuleReplacementPlugin()
-  ]
+  ],
+  node: {
+    Buffer: false,
+    process: false
+  }
 };
 // module.exports = config;
 

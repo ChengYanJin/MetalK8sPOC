@@ -66,6 +66,7 @@
     "webpack-dev-server": "^3.10.3"
   },
   "interleave": {
-    "src/App": "MetalMicroApp"
+    "src/App": "MetalMicroApp",
+    "src/ducks/config": "Reducer"
   }
 }
