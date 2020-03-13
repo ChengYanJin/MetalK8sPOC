@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   useHistory,
   Switch,
@@ -10,18 +10,10 @@ import {
 import Volume from "./Volume";
 import Node from "./Node";
 import Owner from "./Owner";
-import configReducer from "./ducks/configReducer";
-import {
-  setActionCreatorNamespace,
-  namespaceReducerFactory
-} from "./ducks/namespaceHelper";
-import { namespaced } from "redux-subspace";
-
-import { SubspaceProvider } from "react-redux-subspace";
 
 const App = props => {
-  const { store, namespace } = props;
-  console.log("namespace", namespace);
+  // const { store, namespace } = props;
+  // console.log("namespace", namespace);
   // set namespace `localMetalk8s`
   // setActionCreatorNamespace(namespace);
   // inject our reducer for metalk8s
@@ -32,53 +24,55 @@ const App = props => {
   //   );
   // }, []);
 
-  const history = useHistory();
-  const location = useLocation();
+  // const history = useHistory();
+  // const location = useLocation();
   let { path } = useRouteMatch();
   path = path === "/" ? "" : path;
 
-  const items = [
-    {
-      onClick: () => history.push(`${path}/volume`),
-      selected: location.pathname === "/volume",
-      title: "Volumes"
-    },
-    {
-      onClick: () => history.push(`${path}/node`),
-      selected: location.pathname === "/node",
-      title: "Nodes"
-    },
-    {
-      onClick: () => history.push("/"),
-      selected: location.pathname === "/",
-      title: "Owner"
-    }
-  ];
+  // const items = [
+  //   {
+  //     onClick: () => history.push(`${path}/volume`),
+  //     selected: location.pathname === "/volume",
+  //     title: "Volumes"
+  //   },
+  //   {
+  //     onClick: () => history.push(`${path}/node`),
+  //     selected: location.pathname === "/node",
+  //     title: "Nodes"
+  //   },
+  //   {
+  //     onClick: () => history.push("/"),
+  //     selected: location.pathname === "/",
+  //     title: "Owner"
+  //   }
+  // ];
 
   return (
-    <SubspaceProvider
-      mapState={state => {
-        console.log("mapState", state);
-        if (state[namespace]) return state[namespace];
-        else return state;
-      }}
-      namespace={namespace}
-    >
+    <>
+      {/* <SubspaceProvider
+        mapState={state => {
+          console.log("mapState", state);
+          if (state[namespace]) return state[namespace];
+          else return state;
+        }}
+        namespace={namespace} */}
+      >
       <div>
         {/* <Tabs items={items} /> */}
         <Switch>
-          <Route path={`${path}/volume`}>
+          {/* <Route path={`${path}/volume`}>
             <Volume />
           </Route>
           <Route path={`${path}/node`}>
             <Node />
-          </Route>
+          </Route> */}
           <Route path="/">
             <Owner />
           </Route>
         </Switch>
       </div>
-    </SubspaceProvider>
+      {/* </SubspaceProvider> */}
+    </>
   );
 };
 

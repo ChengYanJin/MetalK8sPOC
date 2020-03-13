@@ -58,9 +58,10 @@ module.exports = {
       library: { type: "var", name: "metalk8s" },
       filename: "remoteEntry.js",
       exposes: {
-        Node: "./src/Node",
+        metalk8sOwner: "./src/Owner",
         reducer: "./src/ducks/reducer"
-      }
+      },
+      shared: ["react", "react-dom"]
     }),
     new HtmlWebpackPlugin({ template: "src/index.html" }),
     new webpack.HotModuleReplacementPlugin()
